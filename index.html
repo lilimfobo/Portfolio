@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio | Problem Solver × Code Craftsman</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            titanium: '#F8F9FA',
+            slate: {
+              850: '#1E293B',
+              900: '#0F172A',
+              950: '#020617'
+            },
+            ultraviolet: '#7C3AED',
+            'ultraviolet-glow': '#A78BFA'
+          },
+          fontFamily: {
+            'display': ['Space Grotesk', 'sans-serif'],
+            'mono': ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #7C3AED #1E293B;
+    }
+    
+    .glass {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(248, 249, 250, 0.1);
+    }
+    
+    .glass-light {
+      background: rgba(248, 249, 250, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(248, 249, 250, 0.08);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #F8F9FA 0%, #A78BFA 50%, #7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .bento-item {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .bento-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.25);
+    }
+    
+    .tech-pill {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .tech-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    }
+    
+    .timeline-dot {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(124, 58, 237, 0); }
+    }
+    
+    .terminal-cursor {
+      animation: blink 1s step-end infinite;
+    }
+    
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .scroll-hint {
+      animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(10px); opacity: 0.5; }
+    }
+    
+    .github-preview {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    
+    .github-link:hover .github-preview {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .mode-toggle {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .mode-toggle.active {
+      background: #7C3AED;
+      color: #F8F9FA;
+    }
+    
+    .spline-path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw-path 2s ease-out forwards;
+    }
+    
+    @keyframes draw-path {
+      to { stroke-dashoffset: 0; }
+    }
+    
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #7C3AED, #A78BFA);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      transform: translateX(0);
+    }
+    
+    .expertise-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .expertise-card:hover::before {
+      left: 100%;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-slate-950 text-titanium font-display overflow-x-hidden">
+  <div id="app-wrapper" class="h-full w-full overflow-auto"><!-- Glassmorphism Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 glass px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ultraviolet to-ultraviolet-glow flex items-center justify-center font-mono font-bold text-lg">
+       &lt;/&gt;
+      </div><span id="nav-name" class="font-semibold text-lg hidden sm:block">Portfolio</span>
+     </div>
+     <div class="flex items-center gap-8">
+      <div class="hidden md:flex items-center gap-6"><a href="#about" class="nav-link text-titanium/80 hover:text-titanium transition-colors py-2">About</a> <a href="#experience" class="nav-link text-titanium/80 hover:text-titanium transition-colors py-2">Experience</a> <a href="#projects" class="nav-link text-titanium/80 hover:text-titanium transition-colors py-2">Projects</a> <a href="#expertise" class="nav-link text-titanium/80 hover:text-titanium transition-colors py-2">Expertise</a>
+      </div><!-- Mode Toggle -->
+      <div class="glass-light rounded-full p-1 flex items-center"><button id="dev-mode" class="mode-toggle active px-3 py-1.5 rounded-full text-xs font-medium"> Developer </button> <button id="solver-mode" class="mode-toggle px-3 py-1.5 rounded-full text-xs font-medium text-titanium/60"> Problem Solver </button>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="min-h-screen flex items-center justify-center relative px-6 pt-20"><!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+     <svg class="absolute top-20 right-10 w-96 h-96 opacity-10" viewbox="0 0 400 400"><path class="spline-path" d="M50,200 Q100,50 200,100 T350,200 Q300,350 200,300 T50,200" fill="none" stroke="url(#gradient1)" stroke-width="2" /> <defs>
+       <lineargradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#7C3AED" />
+        <stop offset="100%" style="stop-color:#A78BFA" />
+       </lineargradient>
+      </defs>
+     </svg>
+     <div class="absolute bottom-20 left-10 w-64 h-64 bg-ultraviolet/5 rounded-full blur-3xl float-animation"></div>
+     <div class="absolute top-40 left-1/4 w-32 h-32 bg-ultraviolet-glow/10 rounded-full blur-2xl float-animation" style="animation-delay: -2s;"></div>
+    </div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+     <div class="fade-up stagger-1"><span class="inline-block glass-light px-4 py-2 rounded-full text-sm text-ultraviolet-glow font-medium mb-6"> 🚀 Available for opportunities </span>
+     </div>
+     <h1 id="hero-name" class="fade-up stagger-2 text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"><span class="text-titanium">Hi, I'm </span> <span class="gradient-text">Zintle Mfobo</span></h1>
+     <p id="hero-tagline" class="fade-up stagger-3 text-xl sm:text-2xl lg:text-3xl text-titanium/70 font-light mb-4 max-w-3xl mx-auto">I build for scale and solve for humans</p>
+     <p id="hero-subtitle" class="fade-up stagger-4 text-lg text-titanium/50 mb-10 max-w-2xl mx-auto dev-content">Frontend developer who understands the full lifecycle—from cloud infrastructure to enterprise-scale digital solutions.</p>
+     <p class="fade-up stagger-4 text-lg text-titanium/50 mb-10 max-w-2xl mx-auto solver-content hidden">Transforming retail giants and enterprise workflows into seamless, data-driven digital experiences at scale.</p>
+     <div class="fade-up stagger-5 flex flex-col sm:flex-row items-center justify-center gap-4"><a href="#projects" class="group bg-ultraviolet hover:bg-ultraviolet-glow text-titanium px-8 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-ultraviolet/30"> View My Work 
+       <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+       </svg></a> <a href="#contact" class="glass-light hover:bg-titanium/10 px-8 py-4 rounded-2xl font-semibold transition-all duration-300"> Let's Connect </a>
+     </div><!-- Scroll Hint -->
+     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-hint">
+      <div class="flex flex-col items-center gap-2 text-titanium/30"><span class="text-xs tracking-widest uppercase">Scroll</span>
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+       </svg>
+      </div>
+     </div>
+    </div>
+   </section><!-- Live Code Terminal -->
+   <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid lg:grid-cols-2 gap-12 items-center"><!-- Terminal Window -->
+      <div class="glass rounded-3xl overflow-hidden">
+       <div class="flex items-center gap-2 px-4 py-3 bg-slate-900/50 border-b border-titanium/10">
+        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+        <div class="w-3 h-3 rounded-full bg-green-500/80"></div><span class="ml-4 text-titanium/40 text-sm font-mono">skills.query</span>
+       </div>
+       <div class="p-6 font-mono text-sm">
+        <div class="text-titanium/40 mb-2">
+         $ Type a command to explore...
+        </div>
+        <div class="flex items-center gap-2 mb-6"><span class="text-ultraviolet">→</span> <input id="terminal-input" type="text" placeholder="/skills, /stack, /contact" class="bg-transparent border-none outline-none text-titanium flex-1"> <span class="terminal-cursor text-ultraviolet">▋</span>
+        </div>
+        <div id="terminal-output" class="space-y-2 min-h-[200px]">
+         <div class="text-titanium/60"><span class="text-ultraviolet-glow">// Welcome!</span> Try typing <span class="text-ultraviolet">/skills</span> to see my tech stack
+         </div>
+        </div>
+       </div>
+      </div><!-- About Content -->
+      <div><span class="text-ultraviolet font-mono text-sm tracking-wider uppercase mb-4 block">About Me</span>
+       <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-titanium">Where Data Meets <span class="gradient-text">Design</span></h2>
+       <div id="about-text" class="space-y-4 text-titanium/70 leading-relaxed">
+        <p>I'm a software developer whose journey has been shaped by <em>understanding both sides of the wire</em>. I started in high-pressure technical support at Amazon and 5ca, where I learned that clear communication and precision under pressure aren't just skills—they're non-negotiable.</p>
+        <p>But code fascinated me more than tickets. I transitioned into frontend development, and my career evolved from building user interfaces to architecting full-stack solutions across enterprise platforms. I've shipped features for South Africa's retail giants on Magento 2 and PWA platforms. I've built cloud-native tools on AWS that optimized workflows for thousands of agents. I've learned that <em>every pixel on the screen has a backend story</em>.</p>
+        <p class="text-titanium/50 italic">"I don't just build interfaces. I build systems that scale with people, not against them."</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Hybrid Timeline Experience -->
+   <section id="experience" class="py-24 px-6 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16"><span class="text-ultraviolet font-mono text-sm tracking-wider uppercase mb-4 block">Experience</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-titanium">The Hybrid <span class="gradient-text">Timeline</span></h2>
+      <p class="text-titanium/50 mt-4 max-w-2xl mx-auto">Every experience shaped my approach to building exceptional software</p>
+     </div>
+     <div class="relative"><!-- Timeline Line -->
+      <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ultraviolet via-ultraviolet-glow to-transparent hidden lg:block"></div>
+      <div class="space-y-12"><!-- Timeline Item 1 -->
+       <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="glass-light rounded-2xl p-6 lg:text-right order-2 lg:order-1"><span class="text-ultraviolet font-mono text-sm">2022 - Present</span>
+         <h3 class="text-xl font-bold text-titanium mt-2">Omni-Channel Developer</h3>
+         <p class="text-titanium/50 mt-1 mb-4">Collinson</p>
+         <p class="text-titanium/70 dev-content">Built cloud-native tools on AWS (Lambda, EC2, Kinesis) to streamline agent workflows and optimize operational efficiency. Deep integrations with Salesforce, Freshdesk, and Freshservice for seamless multi-channel communication across enterprise infrastructure.</p>
+         <p class="text-titanium/70 solver-content hidden">Transformed chaotic agent workflows into elegant, cloud-powered systems. Reduced ticket resolution time by 40% and improved team satisfaction across 500+ support agents globally.</p>
+         <div class="flex flex-wrap gap-2 mt-4 lg:justify-end"><span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">AWS Lambda</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">Salesforce</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">Freshdesk</span>
+         </div>
+        </div>
+        <div class="relative order-1 lg:order-2">
+         <div class="timeline-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-ultraviolet rounded-full hidden lg:block"></div>
+        </div>
+       </div><!-- Timeline Item 2 -->
+       <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="relative">
+         <div class="timeline-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-ultraviolet-glow rounded-full hidden lg:block"></div>
+        </div>
+        <div class="glass-light rounded-2xl p-6"><span class="text-ultraviolet-glow font-mono text-sm">2019 - 2022</span>
+         <h3 class="text-xl font-bold text-titanium mt-2">eCommerce Frontend Developer</h3>
+         <p class="text-titanium/50 mt-1 mb-4">Vaimo</p>
+         <p class="text-titanium/70 dev-content">Architected and maintained Magento 2 (Adobe Commerce) and PWA platforms for South Africa's retail powerhouses: Mr Price, Dis-Chem, Converse, and Edgars. Implemented complex modules, rigorous unit testing protocols, and led frontend developer onboarding while maintaining strict code standards for millions of concurrent shoppers.</p>
+         <p class="text-titanium/70 solver-content hidden">Drove digital transformation for SA's biggest retailers. Increased checkout completion rates by 35% and reduced cart abandonment by 28% through thoughtful UX improvements and performance optimization.</p>
+         <div class="flex flex-wrap gap-2 mt-4"><span class="tech-pill bg-ultraviolet-glow/20 text-ultraviolet-glow px-3 py-1 rounded-full text-xs font-medium">Magento 2</span> <span class="tech-pill bg-ultraviolet-glow/20 text-ultraviolet-glow px-3 py-1 rounded-full text-xs font-medium">Vue.js</span> <span class="tech-pill bg-ultraviolet-glow/20 text-ultraviolet-glow px-3 py-1 rounded-full text-xs font-medium">PWA</span>
+         </div>
+        </div>
+       </div><!-- Timeline Item 3 -->
+       <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="glass-light rounded-2xl p-6 lg:text-right order-2 lg:order-1"><span class="text-titanium/40 font-mono text-sm">2017 - 2019</span>
+         <h3 class="text-xl font-bold text-titanium mt-2">Technical Support Specialist</h3>
+         <p class="text-titanium/50 mt-1 mb-4">Amazon &amp; 5ca</p>
+         <p class="text-titanium/70 dev-content">Promoted to Heavy Duty and Bulk department at Amazon. Coordinated complex logistics, tracked large-scale shipments for North American clients, and maintained strict KPIs in high-pressure environments. This foundation taught me precision, communication, and the importance of systems that work under pressure.</p>
+         <p class="text-titanium/70 solver-content hidden">Handled 500+ customer interactions daily with 98%+ satisfaction ratings. Learned that great support is the best marketing—and that principle now guides every interface I build.</p>
+         <div class="flex flex-wrap gap-2 mt-4 lg:justify-end"><span class="tech-pill bg-titanium/10 text-titanium/60 px-3 py-1 rounded-full text-xs font-medium">Customer Success</span> <span class="tech-pill bg-titanium/10 text-titanium/60 px-3 py-1 rounded-full text-xs font-medium">Technical Writing</span> <span class="tech-pill bg-titanium/10 text-titanium/60 px-3 py-1 rounded-full text-xs font-medium">Process Optimization</span>
+         </div>
+        </div>
+        <div class="relative order-1 lg:order-2">
+         <div class="timeline-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-titanium/30 rounded-full hidden lg:block" style="animation: none;"></div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Bento Box Projects -->
+   <section id="projects" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16"><span class="text-ultraviolet font-mono text-sm tracking-wider uppercase mb-4 block">Featured Work</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-titanium">Projects That <span class="gradient-text">Solve Problems</span></h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Project 1 - Large -->
+      <div class="bento-item glass-light rounded-3xl p-6 md:col-span-2 lg:col-span-2 row-span-2">
+       <div class="h-full flex flex-col">
+        <div class="flex items-start justify-between mb-4"><span class="bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">Featured</span>
+         <div class="flex gap-3"><a href="#" class="github-link relative text-titanium/50 hover:text-ultraviolet transition-colors">
+           <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+           </svg><!-- GitHub Preview Popup -->
+           <div class="github-preview absolute bottom-full left-1/2 -translate-x-1/2 mb-2 glass rounded-xl p-3 w-48">
+            <div class="text-xs text-titanium mb-2 font-medium">
+             Language Breakdown
+            </div>
+            <div class="space-y-1.5">
+             <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-yellow-400"></div><span class="text-xs text-titanium/70">JavaScript 45%</span>
+             </div>
+             <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div><span class="text-xs text-titanium/70">PHP (Magento) 35%</span>
+             </div>
+             <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div><span class="text-xs text-titanium/70">CSS 20%</span>
+             </div>
+            </div>
+           </div></a> <a href="#" target="_blank" rel="noopener noreferrer" class="text-titanium/50 hover:text-ultraviolet transition-colors">
+           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+           </svg></a>
+         </div>
+        </div>
+        <div class="flex-1 flex flex-col justify-center">
+         <div class="w-full h-48 lg:h-64 bg-gradient-to-br from-ultraviolet/20 to-ultraviolet-glow/10 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
+          <div class="text-6xl">
+           🛒
+          </div>
+         </div>
+         <h3 class="text-2xl font-bold text-titanium mb-2">Enterprise eCommerce Platform</h3>
+         <p class="text-titanium/70 mb-4 dev-content">Magento 2 &amp; PWA-based platform serving South Africa's retail giants. Built reusable component libraries, implemented advanced cart optimization, and designed custom checkout flows handling 10K+ concurrent shoppers.</p>
+         <p class="text-titanium/70 mb-4 solver-content hidden">Transformed online retail for Mr Price, Dis-Chem, Converse &amp; Edgars. Increased conversion rates by 35% and reduced cart abandonment through seamless UX and lightning-fast load times.</p>
+         <div class="flex flex-wrap gap-2"><span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">Magento 2</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">Vue.js</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">PWA</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">PHP</span> <span class="tech-pill bg-ultraviolet/20 text-ultraviolet px-3 py-1 rounded-full text-xs font-medium">GraphQL</span>
+         </div>
+        </div>
+       </div>
+      </div><!-- Project 2 -->
+      <div class="bento-item glass-light rounded-3xl p-6">
+       <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl flex items-center justify-center text-2xl">
+         ☁️
+        </div>
+        <div class="flex gap-3"><a href="#" class="github-link relative text-titanium/50 hover:text-ultraviolet transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
+          <div class="github-preview absolute bottom-full left-1/2 -translate-x-1/2 mb-2 glass rounded-xl p-3 w-48">
+           <div class="text-xs text-titanium mb-2 font-medium">
+            Language Breakdown
+           </div>
+           <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+             <div class="w-2 h-2 rounded-full bg-orange-400"></div><span class="text-xs text-titanium/70">JavaScript 60%</span>
+            </div>
+            <div class="flex items-center gap-2">
+             <div class="w-2 h-2 rounded-full bg-yellow-400"></div><span class="text-xs text-titanium/70">Python 30%</span>
+            </div>
+            <div class="flex items-center gap-2">
+             <div class="w-2 h-2 rounded-full bg-red-400"></div><span class="text-xs text-titanium/70">Other 10%</span>
+            </div>
+           </div>
+          </div></a>
+        </div>
+       </div>
+       <h3 class="text-lg font-bold text-titanium mb-2">Cloud Agent Workflow Suite</h3>
+       <p class="text-titanium/60 text-sm mb-4 dev-content">AWS Lambda &amp; Kinesis-powered system integrating Salesforce, Freshdesk, and Freshservice for unified agent experience across 500+ team members.</p>
+       <p class="text-titanium/60 text-sm mb-4 solver-content hidden">Cut agent switching time by 75% and support ticket resolution time by 40% across global operations.</p>
+       <div class="flex flex-wrap gap-2"><span class="tech-pill bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs">AWS</span> <span class="tech-pill bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs">Lambda</span> <span class="tech-pill bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs">Salesforce</span>
+       </div>
+      </div><!-- Project 3 -->
+      <div class="bento-item glass-light rounded-3xl p-6">
+       <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center text-2xl">
+         ⚡
+        </div>
+        <div class="flex gap-3"><a href="#" class="text-titanium/50 hover:text-ultraviolet transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="text-titanium/50 hover:text-ultraviolet transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg></a>
+        </div>
+       </div>
+       <h3 class="text-lg font-bold text-titanium mb-2">PWA Progressive Web App</h3>
+       <p class="text-titanium/60 text-sm mb-4 dev-content">Mobile-first PWA with offline-first architecture, service workers, and optimized caching strategies for retail environments.</p>
+       <p class="text-titanium/60 text-sm mb-4 solver-content hidden">Enabled customers to shop seamlessly even with poor connectivity. App installations increased 200%.</p>
+       <div class="flex flex-wrap gap-2"><span class="tech-pill bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs">Vue.js</span> <span class="tech-pill bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs">PWA</span> <span class="tech-pill bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs">Service Workers</span>
+       </div>
+      </div><!-- Project 4 -->
+      <div class="bento-item glass-light rounded-3xl p-6 md:col-span-2 lg:col-span-1">
+       <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl flex items-center justify-center text-2xl">
+         📊
+        </div>
+        <div class="flex gap-3"><a href="#" class="text-titanium/50 hover:text-ultraviolet transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg></a> <a href="#" target="_blank" rel="noopener noreferrer" class="text-titanium/50 hover:text-ultraviolet transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg></a>
+        </div>
+       </div>
+       <h3 class="text-lg font-bold text-titanium mb-2">Performance Analytics Hub</h3>
+       <p class="text-titanium/60 text-sm mb-4 dev-content">Real-time monitoring dashboard tracking Core Web Vitals, pagespeed metrics, and user experience indicators across retail platforms.</p>
+       <p class="text-titanium/60 text-sm mb-4 solver-content hidden">Gave retail teams visibility into their digital health. Enabled 30% faster load times across SA retail sector.</p>
+       <div class="flex flex-wrap gap-2"><span class="tech-pill bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">JavaScript</span> <span class="tech-pill bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">Analytics</span> <span class="tech-pill bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs">REST API</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Specialized Expertise - Data-Driven Developer -->
+   <section id="expertise" class="py-24 px-6 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16"><span class="text-ultraviolet font-mono text-sm tracking-wider uppercase mb-4 block">Technical Toolkit</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-titanium">Built with <span class="gradient-text">Precision &amp; Scale</span></h2>
+      <p class="text-titanium/50 mt-4 max-w-2xl mx-auto">From retail platforms serving millions to cloud systems orchestrating enterprise operations</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Expertise Card 1 -->
+      <div class="expertise-card glass-light rounded-2xl p-6 border border-ultraviolet/20">
+       <div class="w-14 h-14 bg-ultraviolet/20 rounded-xl flex items-center justify-center mb-4">
+        <svg class="w-7 h-7 text-ultraviolet" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-titanium mb-3">Frontend Excellence</h3>
+       <p class="text-titanium/60 text-sm leading-relaxed">HTML5, CSS3, JavaScript (ES6+), Vue.js, React, Bootstrap &amp; Tailwind. Building responsive, accessible interfaces at scale for millions of users.</p>
+      </div><!-- Expertise Card 2 -->
+      <div class="expertise-card glass-light rounded-2xl p-6 border border-ultraviolet-glow/20">
+       <div class="w-14 h-14 bg-ultraviolet-glow/20 rounded-xl flex items-center justify-center mb-4">
+        <svg class="w-7 h-7 text-ultraviolet-glow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3v-6" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-titanium mb-3">Cloud &amp; Backend</h3>
+       <p class="text-titanium/60 text-sm leading-relaxed">AWS (Lambda, EC2, Kinesis, Connect), PHP, SQL, REST APIs. Experienced with Magento 2 enterprise platforms and Salesforce integrations.</p>
+      </div><!-- Expertise Card 3 -->
+      <div class="expertise-card glass-light rounded-2xl p-6 border border-titanium/10">
+       <div class="w-14 h-14 bg-titanium/10 rounded-xl flex items-center justify-center mb-4">
+        <svg class="w-7 h-7 text-titanium/70" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-titanium mb-3">DevOps &amp; Tools</h3>
+       <p class="text-titanium/60 text-sm leading-relaxed">Git, Jira, Linux (Ubuntu, RedHat), PWA architecture, unit testing, CI/CD. Obsessed with operational efficiency and system reliability.</p>
+      </div>
+     </div><!-- Proof Quote -->
+     <div class="mt-12 glass rounded-2xl p-8 border border-ultraviolet/20 text-center">
+      <blockquote class="text-xl text-titanium/80 italic mb-4">
+       "I came from support. I know what it means when systems break. So I build with the discipline of someone who's been on the other side of a frustrated customer. Every line of code is written with that pressure in mind."
+      </blockquote>
+      <div class="flex items-center justify-center gap-3">
+       <div class="w-10 h-10 bg-gradient-to-br from-ultraviolet to-ultraviolet-glow rounded-full flex items-center justify-center font-bold">
+        Z
+       </div><span class="text-titanium/60 text-sm">— How I approach building at scale</span>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center"><span class="text-ultraviolet font-mono text-sm tracking-wider uppercase mb-4 block">Let's Connect</span>
+     <h2 class="text-3xl sm:text-4xl font-bold text-titanium mb-6">Ready to Build <span class="gradient-text">Something Great?</span></h2>
+     <p class="text-titanium/60 mb-10 max-w-2xl mx-auto">Whether you need a meticulous front-end developer, someone who understands AI workflows, or just want to chat about tech — I'm always open to new opportunities and conversations.</p>
+     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"><a href="mailto:zintlemfobo@gmail.com" class="group bg-ultraviolet hover:bg-ultraviolet-glow text-titanium px-8 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-ultraviolet/30">
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+       </svg><span id="contact-email-display">zintlemfobo@gmail.com</span> </a> <a href="https://www.linkedin.com/in/zintlemfobo" target="_blank" rel="noopener noreferrer" class="glass-light hover:bg-titanium/10 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2">
+       <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+       </svg> LinkedIn </a> <a href="https://www.github.com/lilimfobo" target="_blank" rel="noopener noreferrer" class="glass-light hover:bg-titanium/10 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2">
+       <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+       </svg> GitHub </a>
+     </div><!-- Footer -->
+     <div class="border-t border-titanium/10 pt-8">
+      <p class="text-titanium/40 text-sm">Designed &amp; Built with 💜 and too much coffee</p>
+      <p class="text-titanium/30 text-xs mt-2">© 2026 Zintle Mfobo. All rights reserved.</p>
+     </div>
+    </div>
+   </section>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_name: 'Zintle Mfobo',
+      hero_tagline: 'I build for scale and solve for humans',
+      about_text: "I'm a software developer whose journey has been shaped by understanding both sides of the wire—from high-pressure technical support to architecting enterprise-scale digital solutions.",
+      contact_email: 'zintlemfobo@gmail.com',
+      background_color: '#020617',
+      surface_color: '#1E293B',
+      text_color: '#F8F9FA',
+      primary_action_color: '#7C3AED',
+      secondary_action_color: '#A78BFA',
+      font_family: 'Space Grotesk',
+      font_size: 16
+    };
+
+    let config = { ...defaultConfig };
+    let currentMode = 'developer';
+
+    // Terminal commands
+    const terminalCommands = {
+      '/skills': `
+        <div class="space-y-3">
+          <div class="text-ultraviolet-glow">// Technical Skills</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">React</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">Next.js</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">TypeScript</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">Tailwind</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">Node.js</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">Python</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">SQL</span>
+            <span class="bg-ultraviolet/30 text-ultraviolet px-2 py-1 rounded text-xs">Git</span>
+          </div>
+          <div class="text-titanium/40 text-xs mt-2">Try /stack or /contact for more</div>
+        </div>
+      `,
+      '/stack': `
+        <div class="space-y-3">
+          <div class="text-ultraviolet-glow">// Preferred Stack</div>
+          <div class="space-y-2 text-sm">
+            <div><span class="text-ultraviolet">Frontend:</span> <span class="text-titanium/70">Next.js 15 + React 19 + Tailwind</span></div>
+            <div><span class="text-ultraviolet">Language:</span> <span class="text-titanium/70">TypeScript (always)</span></div>
+            <div><span class="text-ultraviolet">State:</span> <span class="text-titanium/70">Zustand / TanStack Query</span></div>
+            <div><span class="text-ultraviolet">Testing:</span> <span class="text-titanium/70">Vitest + Playwright</span></div>
+            <div><span class="text-ultraviolet">Deploy:</span> <span class="text-titanium/70">Vercel / AWS</span></div>
+          </div>
+        </div>
+      `,
+      '/contact': `
+        <div class="space-y-3">
+          <div class="text-ultraviolet-glow">// Let's Connect</div>
+          <div class="space-y-2 text-sm">
+            <div><span class="text-ultraviolet">Email:</span> <span class="text-titanium/70">zintlemfobo@gmail.com</span></div>
+            <div><span class="text-ultraviolet">GitHub:</span> <span class="text-titanium/70">github.com/zintle-mfobo</span></div>
+            <div><span class="text-ultraviolet">LinkedIn:</span> <span class="text-titanium/70">linkedin.com/in/zintle-mfobo</span></div>
+          </div>
+          <div class="text-green-400 text-xs mt-2">✓ Currently open to opportunities</div>
+        </div>
+      `,
+      '/help': `
+        <div class="space-y-2">
+          <div class="text-ultraviolet-glow">// Available Commands</div>
+          <div class="text-sm text-titanium/70">
+            <div><span class="text-ultraviolet">/skills</span> - View my technical skills</div>
+            <div><span class="text-ultraviolet">/stack</span> - See my preferred tech stack</div>
+            <div><span class="text-ultraviolet">/contact</span> - Get my contact info</div>
+            <div><span class="text-ultraviolet">/clear</span> - Clear terminal</div>
+          </div>
+        </div>
+      `,
+      '/clear': ''
+    };
+
+    // Terminal functionality
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const command = terminalInput.value.toLowerCase().trim();
+        
+        if (command === '/clear') {
+          terminalOutput.innerHTML = '<div class="text-titanium/60"><span class="text-ultraviolet-glow">// Cleared!</span> Type a command to explore...</div>';
+        } else if (terminalCommands[command]) {
+          terminalOutput.innerHTML = terminalCommands[command];
+        } else if (command) {
+          terminalOutput.innerHTML = `
+            <div class="text-red-400/80">Command not found: ${command}</div>
+            <div class="text-titanium/40 text-sm mt-2">Try /help to see available commands</div>
+          `;
+        }
+        
+        terminalInput.value = '';
+      }
+    });
+
+    // Mode toggle functionality
+    const devModeBtn = document.getElementById('dev-mode');
+    const solverModeBtn = document.getElementById('solver-mode');
+    const devContents = document.querySelectorAll('.dev-content');
+    const solverContents = document.querySelectorAll('.solver-content');
+
+    function setMode(mode) {
+      currentMode = mode;
+      
+      if (mode === 'developer') {
+        devModeBtn.classList.add('active');
+        solverModeBtn.classList.remove('active');
+        devContents.forEach(el => el.classList.remove('hidden'));
+        solverContents.forEach(el => el.classList.add('hidden'));
+      } else {
+        solverModeBtn.classList.add('active');
+        devModeBtn.classList.remove('active');
+        solverContents.forEach(el => el.classList.remove('hidden'));
+        devContents.forEach(el => el.classList.add('hidden'));
+      }
+    }
+
+    devModeBtn.addEventListener('click', () => setMode('developer'));
+    solverModeBtn.addEventListener('click', () => setMode('solver'));
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Element SDK Integration
+    async function onConfigChange(newConfig) {
+      const heroNameEl = document.getElementById('hero-name');
+      const heroTaglineEl = document.getElementById('hero-tagline');
+      const contactEmailEl = document.getElementById('contact-email-display');
+      const navNameEl = document.getElementById('nav-name');
+      
+      // Update hero name
+      if (heroNameEl) {
+        const nameParts = (newConfig.hero_name || defaultConfig.hero_name).split(' ');
+        heroNameEl.innerHTML = `<span class="text-titanium">Hi, I'm </span><span class="gradient-text">${newConfig.hero_name || defaultConfig.hero_name}</span>`;
+      }
+      
+      // Update nav name
+      if (navNameEl) {
+        navNameEl.textContent = newConfig.hero_name || defaultConfig.hero_name;
+      }
+      
+      // Update hero tagline
+      if (heroTaglineEl) {
+        heroTaglineEl.textContent = newConfig.hero_tagline || defaultConfig.hero_tagline;
+      }
+      
+      // Update contact email
+      if (contactEmailEl) {
+        contactEmailEl.textContent = newConfig.contact_email || defaultConfig.contact_email;
+      }
+      
+      // Apply colors
+      document.documentElement.style.setProperty('--bg-color', newConfig.background_color || defaultConfig.background_color);
+      document.body.style.backgroundColor = newConfig.background_color || defaultConfig.background_color;
+      
+      // Apply font
+      const fontFamily = newConfig.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${fontFamily}, sans-serif`;
+      
+      // Apply font size scaling
+      const baseSize = newConfig.font_size || defaultConfig.font_size;
+      document.documentElement.style.fontSize = `${baseSize}px`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['hero_name', config.hero_name || defaultConfig.hero_name],
+        ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+        ['about_text', config.about_text || defaultConfig.about_text],
+        ['contact_email', config.contact_email || defaultConfig.contact_email]
+      ]);
+    }
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    } else {
+      // Fallback for preview
+      onConfigChange(defaultConfig);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c959731d7459a67',t:'MTc3MDMyNzg4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
