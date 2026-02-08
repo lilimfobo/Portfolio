@@ -181,3 +181,43 @@ body {
 body.solver-active #avatar-mouth {
   d: path("M88,105 Q100,115 112,105");
 }
+
+#interactive-avatar {
+  position: relative;
+  z-index: 10;
+}
+
+.skill-bubble {
+  position: absolute;
+  padding: 6px 12px;
+  background: rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  border-radius: 99px;
+  color: #A78BFA;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+  white-space: nowrap;
+  animation: pop-and-float 2s ease-out forwards;
+}
+
+@keyframes pop-and-float {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.1) translateY(-10px);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translateY(-40px);
+  }
+}

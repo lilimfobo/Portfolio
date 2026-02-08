@@ -150,6 +150,44 @@ document.querySelector('#app-wrapper').addEventListener('mousemove', (e) => {
   const hY = Math.sin(angle) * hDist;
   head.style.transform = `translate(${hX}px, ${hY}px)`;
 });
+const skills = ['JS', 'React', 'Magento', 'CSS', 'TypeScript', 'AWS', 'Vue', 'PHP', 'Tailwind', 'SQL','PHP'];
+const avatarContainer = document.querySelector('.avatar-container');
+
+function spawnSkills() {
+  let firstIdx = Math.floor(Math.random() * skills.length);
+  let secondIdx;
+  do {
+    secondIdx = Math.floor(Math.random() * skills.length);
+  } while (secondIdx === firstIdx);
+
+  const selectedIndices = [firstIdx, secondIdx];
+
+  selectedIndices.forEach((skillIdx, i) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'skill-bubble';
+    bubble.innerText = skills[skillIdx];
+
+    let x;
+    if (i === 0) {
+      x = Math.random() * 25 - 10; 
+    } else {
+      x = Math.random() * 25 + 75;
+    }
+
+    const y = Math.random() * 50 + 15; 
+    
+    bubble.style.left = `${x}%`;
+    bubble.style.top = `${y}%`;
+
+    avatarContainer.appendChild(bubble);
+
+    setTimeout(() => {
+      bubble.remove();
+    }, 2000);
+  });
+}
+
+setInterval(spawnSkills, 1500);
 
 async function onConfigChange(newConfig) {
   const heroNameEl = document.getElementById('hero-name');
