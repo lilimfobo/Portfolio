@@ -15,9 +15,13 @@
 
 
 🛠️ Tech Stack
-    HTML5 / CSS3: Semantic structure and custom keyframe animations.Tailwind CSS: For rapid utility-first styling and responsive design.
+    HTML5 / CSS3: Semantic structure and custom keyframe animations.
+    
+    Tailwind CSS: For rapid utility-first styling and responsive design.
 
-    Vanilla JavaScript: Used for state management (mode toggling), DOM manipulation, and the interactive SVG logic.SVG Animation: Real-time coordinate tracking and parallax effects.
+    Vanilla JavaScript: Used for state management (mode toggling), DOM manipulation, and the interactive SVG logic.
+    
+    SVG Animation: Real-time coordinate tracking and parallax effects.
 
 
 🧠 Technical Highlights
@@ -40,4 +44,3 @@
     Name: Zintle Mfobo
     Email: zintlemfobo@gmail.com
     LinkedIn: linkedin.com/in/zintlemfobo
-    
