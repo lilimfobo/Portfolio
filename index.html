@@ -65,8 +65,42 @@
      <div class="absolute top-40 left-1/4 w-32 h-32 bg-ultraviolet-glow/10 rounded-full blur-2xl float-animation" style="animation-delay: -2s;"></div>
     </div>
     <div class="max-w-5xl mx-auto text-center relative z-10">
-     <div class="fade-up stagger-1"><span class="inline-block glass-light px-4 py-2 rounded-full text-sm text-ultraviolet-glow font-medium mb-6"> 🚀 Available for opportunities </span>
+     <div class="fade-up stagger-1">
+      <span class="inline-block glass-light px-4 py-2 rounded-full text-sm text-ultraviolet-glow font-medium mb-6"> 🚀 Available for opportunities </span>
      </div>
+    <div class="avatar-container relative w-64 h-64 mx-auto mb-4 fade-up stagger-1">
+      <svg id="interactive-avatar" viewBox="0 0 200 200" class="w-full h-full">
+      <circle cx="100" cy="100" r="90" fill="#A78BFA" opacity="0.2" />
+    
+      <path d="M80,70 Q20,130 30,160 Q50,180 80,160" fill="#1A1A1A" />
+      <path d="M120,70 Q180,130 170,160 Q150,180 120,160" fill="#1A1A1A" />
+
+      <g id="head-move">
+        <path d="M70,70 Q70,40 100,40 Q130,40 130,70 Q130,120 100,120 Q70,120 70,70" fill="#5C2E0E" />
+      
+        <path d="M65,70 Q65,30 100,30 Q135,30 135,70 Q135,80 120,75 Q100,65 65,85 Z" fill="#1A1A1A" />
+      
+        <circle cx="68" cy="85" r="8" fill="#5C2E0E" />
+        <circle cx="132" cy="85" r="8" fill="#5C2E0E" />
+        <circle cx="68" cy="95" r="2" fill="none" stroke="#F8F9FA" stroke-width="1" />
+        <circle cx="132" cy="95" r="2" fill="none" stroke="#F8F9FA" stroke-width="1" />
+
+        <g id="eyes-group">
+          <circle cx="85" cy="85" r="12" fill="none" stroke="#F8F9FA" stroke-width="1.5" />
+          <circle cx="115" cy="85" r="12" fill="none" stroke="#F8F9FA" stroke-width="1.5" />
+          <path d="M97,85 L103,85" stroke="#F8F9FA" stroke-width="1.5" />
+        
+          <circle id="pupil-l" cx="85" cy="85" r="4" fill="#1A1A1A" />
+          <circle id="pupil-r" cx="115" cy="85" r="4" fill="#1A1A1A" />
+        
+          <circle cx="85" cy="98" r="4" fill="#F57799" opacity="0.4" />
+          <circle cx="115" cy="98" r="4" fill="#F57799" opacity="0.4" />
+        </g>
+
+        <path id="avatar-mouth" d="M90,105 Q100,110 110,105" fill="none" stroke="#F8F9FA" stroke-width="1.5" stroke-linecap="round" />
+        </g>
+      </svg>
+    </div>
      <h1 id="hero-name" class="fade-up stagger-2 text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"><span class="text-titanium">Hi, I'm </span> <span class="gradient-text">Zintle Mfobo</span></h1>
      <p id="hero-tagline" class="fade-up stagger-3 text-xl sm:text-2xl lg:text-3xl text-titanium/70 font-light mb-4 max-w-3xl mx-auto">I build for scale and solve for humans</p>
      <p id="hero-subtitle" class="fade-up stagger-4 text-lg text-titanium/50 mb-10 max-w-2xl mx-auto dev-content">Frontend developer who understands the full lifecycle—from cloud infrastructure to enterprise-scale digital solutions.</p>

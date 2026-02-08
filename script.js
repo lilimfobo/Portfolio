@@ -125,6 +125,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+document.querySelector('#app-wrapper').addEventListener('mousemove', (e) => {
+  const avatar = document.getElementById('interactive-avatar');
+  const head = document.getElementById('head-move');
+  if (!avatar || !head) return;
+
+  const rect = avatar.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+  
+  const pDist = 3;
+  const pX = Math.cos(angle) * pDist;
+  const pY = Math.sin(angle) * pDist;
+
+  document.getElementById('pupil-l').setAttribute('cx', 85 + pX);
+  document.getElementById('pupil-l').setAttribute('cy', 85 + pY);
+  document.getElementById('pupil-r').setAttribute('cx', 115 + pX);
+  document.getElementById('pupil-r').setAttribute('cy', 85 + pY);
+
+  const hDist = 5;
+  const hX = Math.cos(angle) * hDist;
+  const hY = Math.sin(angle) * hDist;
+  head.style.transform = `translate(${hX}px, ${hY}px)`;
+});
+
 async function onConfigChange(newConfig) {
   const heroNameEl = document.getElementById('hero-name');
   const heroTaglineEl = document.getElementById('hero-tagline');

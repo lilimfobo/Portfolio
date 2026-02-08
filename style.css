@@ -171,3 +171,13 @@ body {
 .expertise-card:hover::before {
   left: 100%;
 }
+
+#head-move {
+  transition: transform 0.2s ease-out;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+body.solver-active #avatar-mouth {
+  d: path("M88,105 Q100,115 112,105");
+}
